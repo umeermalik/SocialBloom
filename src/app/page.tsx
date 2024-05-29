@@ -5,7 +5,18 @@ import Calendar from 'react-calendar';
 
 export default function Home() {
   const [video, setVideo] = useState("https://www.w3schools.com/html/mov_bbb.mp4");
-   const [date, setDate] = useState(new Date()); 
+  const [date, setDate] = useState(new Date());
+  const [currentComment, setCurrentComment] = useState(0);
+
+  const comments = [
+    { text: 'Great service! Highly recommend.', rating: 4.5, author: 'John Doe' },
+    { text: 'Excellent support team, very responsive.', rating: 5, author: 'Jane Smith' },
+    { text: 'Good experience overall, will use again.', rating: 4, author: 'David Brown' },
+  ];
+
+  const handleSwipeLeft = () => {
+    setCurrentComment((prevIndex) => (prevIndex === comments.length - 1 ? 0 : prevIndex + 1));
+  }; 
   const tableData = [
     {
       benefit: 'DFY custom sales engine from lead to close',
@@ -127,7 +138,8 @@ export default function Home() {
       fontSize: '20px',
       fontWeight: '600',
       color: 'black',
-    },customCalendar: {
+    },
+    customCalendar: {
       width: '300px', 
       maxWidth: '100%',
       border: '1px solid #ddd',
@@ -248,14 +260,43 @@ export default function Home() {
       padding: '8px',
       color: '#fff',
     },
+     dropdown: {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    backgroundColor: '#fff',
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+    zIndex: 1,
+  },
+  dropdownMenu: {
+    listStyle: 'none',
+    padding: 0,
+    margin: 0,
+  },
+  dropdownMenuItem: {
+    padding: '10px',
+    textDecoration: 'none',
+    color: '#333',
+    display: 'block',
+  },
   };
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+const handleDropdownOpen = () => {
+  setIsDropdownOpen(true);
+};
+
+const handleDropdownClose = () => {
+  setIsDropdownOpen(false);
+};
 
   return (
     <main>
       <div>
         <header style={styles.header}>
+       
           <div style={styles.logo}>
-            <h1>MyApp</h1>
+            <h1>Social Bloom</h1>
           </div>
           <nav>
             <ul style={styles.nav}>
@@ -264,19 +305,28 @@ export default function Home() {
                   Home
                 </a>
               </li>
-              <li style={styles.navItem}>
-                <a href="#about" style={styles.link}>
-                  About
-                </a>
-              </li>
+              <li style={styles.navItem} onMouseEnter={handleDropdownOpen} onMouseLeave={handleDropdownClose}>
+  <a href="#about" style={styles.link}>
+    Industries
+  </a>
+  {isDropdownOpen && (
+    <div style={styles.dropdown}>
+      <ul style={styles.dropdownMenu}>
+        <li><a href="#industry1" style={styles.dropdownMenuItem}>Industry 1</a></li>
+        <li><a href="#industry2" style={styles.dropdownMenuItem}>Industry 2</a></li>
+        <li><a href="#industry3" style={styles.dropdownMenuItem}>Industry 3</a></li>
+      </ul>
+    </div>
+  )}
+</li>
               <li style={styles.navItem}>
                 <a href="#services" style={styles.link}>
-                  Services
+                  Case studies
                 </a>
               </li>
               <li style={styles.navItem}>
                 <a href="#contact" style={styles.link}>
-                  Contact
+                  Blog
                 </a>
               </li>
             </ul>
@@ -417,25 +467,72 @@ export default function Home() {
           </div>
         </div>
         <div style={{ background: '#569CFC', width: '100%', height: '600px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
-          <div style={{ marginLeft: '50px', marginRight: '50px', flex: 1 }}>
-            <p style={{color:'white'}}>Let’s talk about your growth!</p>
-            <p style={{ marginTop: '10px',color:'white' }}>
-              SocialBloom provides an entire sales engine from lead to close within 90 days. This same system has generated 10,000+ leads and millions in revenue for our clients.
-            </p>
-            <p style={{ marginTop: '10px' ,color:'white'}}>
-Understanding your Ideal Customer            </p>
- <p style={{ marginTop: '10px', color:'white' }}>
-Craft compelling offers and messaging           </p>
- <p style={{ marginTop: '10px',color:'white' }}>
-Creating / Managing outbound and marketing campaigns            </p>
+         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', position: 'relative' }}>
+  <div style={{ marginLeft: '50px', marginRight: '50px', flex: 1 }}>
+    <p style={{ color: 'white' }}>Let’s talk about your growth!</p>
+    <p style={{ marginTop: '10px', color: 'white' }}>
+      SocialBloom provides an entire sales engine from lead to close within 90 days. This same system has generated 10,000+ leads and millions in revenue for our clients.
+    </p>
+    <p style={{ marginTop: '10px', color: 'white' }}>
+      Understanding your Ideal Customer
+    </p>
+    <p style={{ marginTop: '10px', color: 'white' }}>
+      Craft compelling offers and messaging
+    </p>
+    <p style={{ marginTop: '10px', color: 'white' }}>
+      Creating / Managing outbound and marketing campaigns
+    </p>
+  </div>
+  <div style={{ flex: 1, position: 'relative', marginTop:'30px' }}>
+    <Calendar value={date} onChange={setDate} />
+    <div style={{ textAlign: 'center', bottom: '50px', right: '50px' }}>
+      <p style={{ color: 'white' ,marginRight:'400px', marginTop:'100px'} }>View Our Rankings and Reviews!</p>
+    </div>
+  </div>
+  
+</div>
+  <div style={{ width: '100%', overflow: 'hidden', position: 'relative', marginTop: '50px' }}>
+      <div style={{ display: 'flex', width: '100%', transition: 'transform 0.5s, opacity 0.5s' }}>
+        {comments.map((comment, index) => (
+          <div key={index} style={{ width: '100%', textAlign: 'center', opacity: index === currentComment ? 1 : 0, transform: `translateX(-${currentComment * 100}%)` }}>
+            <p style={{ fontSize: '18px', lineHeight: '1.6', marginBottom: '20px' }}>{comment.text}</p>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>
+              {[...Array(5)].map((star, i) => (
+                <span key={i} style={{ marginRight: '2px', color: i < comment.rating ? '#ffc107' : '#e4e5e9' }}>★</span>
+              ))}
+            </div>
+            <p style={{ fontSize: '16px', color: '#666' }}>-- {comment.author}</p>
           </div>
-          <div style={{ flex: 1 }}>
-            <Calendar value={date} onChange={setDate} />
-          </div>
-        </div>
+        ))}
       </div>
+      <button style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: '#007bff', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer', transition: 'background-color 0.3s' }} onClick={handleSwipeLeft}>
+    View More
+  </button>
+    </div>
+    <div style={{ backgroundColor: '#333', color: 'white', padding: '50px 0', textAlign: 'center' }}>
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', marginBottom: '20px' }}>
+    <a href="mailto:your@email.com" style={{ color: 'white', textDecoration: 'none' }}>
+      <img src="email-icon.png" alt="Email" style={{ width: '30px', height: '30px' }} />
+    </a>
+    <a href="https://wa.me/1234567890" style={{ color: 'white', textDecoration: 'none' }}>
+      <img src="whatsapp-icon.png" alt="WhatsApp" style={{ width: '30px', height: '30px' }} />
+    </a>
+    <a href="https://www.instagram.com/your_instagram/" style={{ color: 'white', textDecoration: 'none' }}>
+      <img src="instagram-icon.png" alt="Instagram" style={{ width: '30px', height: '30px' }} />
+    </a>
+  </div>
+  <p style={{ fontSize: '20px', marginBottom: '20px' }}>Connect with us on social media:</p>
+  <div style={{ marginBottom: '20px' }}>
+    <p style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>Contact Us:</p>
+    <p style={{ fontSize: '20px' }}>Phone: +123-456-7890</p>
+    <p style={{ fontSize: '20px' }}>Email: your@email.com</p>
+  </div>
+  <p style={{ marginBottom: '20px', fontSize: '18px' }}>Follow us on social media for updates and promotions!</p>
+</div>
+
+        </div>
       </div>
     </main>
   );
 }
+
