@@ -1,5 +1,4 @@
-import Image from "next/image";
-"use client";
+"use client"
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 
@@ -7,6 +6,7 @@ export default function Home() {
   const [video, setVideo] = useState("https://www.w3schools.com/html/mov_bbb.mp4");
   const [date, setDate] = useState(new Date());
   const [currentComment, setCurrentComment] = useState(0);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const comments = [
     { text: 'Great service! Highly recommend.', rating: 4.5, author: 'John Doe' },
@@ -14,9 +14,6 @@ export default function Home() {
     { text: 'Good experience overall, will use again.', rating: 4, author: 'David Brown' },
   ];
 
-  const handleSwipeLeft = () => {
-    setCurrentComment((prevIndex) => (prevIndex === comments.length - 1 ? 0 : prevIndex + 1));
-  }; 
   const tableData = [
     {
       benefit: 'DFY custom sales engine from lead to close',
@@ -56,245 +53,22 @@ export default function Home() {
     },
   ];
 
-  const styles = {
-    header: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '10px 20px',
-      backgroundColor: '#333',
-      color: '#fff',
-    },
-    logo: {
-      fontSize: '24px',
-      fontWeight: 'bold',
-      color: 'lightblue',
-    },
-    nav: {
-      display: 'flex',
-      listStyle: 'none',
-    },
-    navItem: {
-      margin: '0 15px',
-    },
-    link: {
-      color: 'lightblue',
-      textDecoration: 'none',
-    },
-    banner: {
-      backgroundColor: 'lightblue',
-      width: '100%',
-      height: '400px',
-      padding: '40px 80px',
-      textAlign: 'center',
-      color: '#fff',
-    },
-    button: {
-      backgroundColor: '#ffffff',
-      color: '#0077b6',
-      border: 'none',
-      padding: '12px 24px',
-      fontSize: '18px',
-      fontWeight: '700',
-      borderRadius: '4px',
-      cursor: 'pointer',
-      transition: 'background-color 0.3s ease',
-      marginTop: '20px',
-    },
-    trustedBy: {
-      backgroundColor: '#555',
-      color: '#fff',
-      width: '100%',
-      height: '300px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '20px',
-      textAlign: 'center',
-    },
-    trustedByTitle: {
-      fontSize: '24px',
-      fontWeight: 'bold',
-      marginBottom: '20px',
-    },
-    logosContainer: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: '30px',
-    },
-    logoStyle2: {
-      fontSize: '20px',
-      fontWeight: '600',
-      color: 'orange',
-    },
-    logoStyle3: {
-      fontSize: '20px',
-      fontWeight: '600',
-      color: 'lightgreen',
-    },
-    logoStyle4: {
-      fontSize: '20px',
-      fontWeight: '600',
-      color: 'black',
-    },
-    customCalendar: {
-      width: '300px', 
-      maxWidth: '100%',
-      border: '1px solid #ddd',
-      borderRadius: '8px',
-      fontFamily: 'Arial, sans-serif',
-    },
-    navigation: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '10px',
-      backgroundColor: '#0077b6',
-      color: 'white',
-      borderTopLeftRadius: '8px',
-      borderTopRightRadius: '8px',
-    },
-    navigationButton: {
-      background: 'none',
-      border: 'none',
-      color: 'inherit',
-      cursor: 'pointer',
-    },
-    weekdays: {
-      display: 'flex',
-      justifyContent: 'space-around',
-      backgroundColor: '#f0f0f0',
-      borderBottom: '1px solid #ddd',
-    },
-    weekday: {
-      textDecoration: 'none',
-      fontSize: '12px',
-    },
-    days: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(7, 1fr)',
-      gap: '2px',
-    },
-    tile: {
-      padding: '10px',
-      textAlign: 'center',
-    },
-    tileNow: {
-      backgroundColor: '#0077b6',
-      color: 'white',
-    },
-    tileActive: {
-      backgroundColor: '#0077b6',
-      color: 'white',
-      borderRadius: '50%',
-    },
-    videoContainer: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: '20px',
-      backgroundColor: '#f9f9f9',
-    },
-    videoTitle: {
-      fontSize: '24px',
-      fontWeight: 'bold',
-      marginBottom: '20px',
-      textAlign: 'center',
-    },
-    sectionTitle: {
-      textAlign: 'center',
-      fontSize: '24px',
-      fontWeight: 'bold',
-      margin: '40px 0',
-    },
-    sectionContainer: {
-      width: '80%',
-      margin: 'auto',
-      display: 'flex',
-      justifyContent: 'space-around',
-      textAlign: 'center',
-      marginTop: '20px',
-    },
-    sectionItem: {
-      width: '30%',
-      height: '380px',
-    },
-    footerContainer: {
-      backgroundColor: '#212529',
-      width: '100%',
-      height:'1500px',
-      padding: '50px 0',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    footerText: {
-      color: 'white',
-      fontSize: '40px',
-      textAlign: 'center',
-    },
-    footerHighlight: {
-      color: 'red',
-      fontSize: '90px',
-      textAlign: 'center',
-    },
-    tableContainer: {
-      padding: '20px',
-      marginTop: '50px',
-      width: '80%',
-    },
-    table: {
-      width: '100%',
-      borderCollapse: 'collapse',
-    },
-    th: {
-      backgroundColor: '#333',
-      color: '#fff',
-      padding: '8px',
-      textAlign: 'left',
-    },
-    td: {
-      border: '1px solid #ddd',
-      padding: '8px',
-      color: '#fff',
-    },
-     dropdown: {
-    position: 'absolute',
-    top: '100%',
-    left: 0,
-    backgroundColor: '#fff',
-    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
-    zIndex: 1,
-  },
-  dropdownMenu: {
-    listStyle: 'none',
-    padding: 0,
-    margin: 0,
-  },
-  dropdownMenuItem: {
-    padding: '10px',
-    textDecoration: 'none',
-    color: '#333',
-    display: 'block',
-  },
+  const handleSwipeLeft = () => {
+    setCurrentComment((prevIndex) => (prevIndex === comments.length - 1 ? 0 : prevIndex + 1));
+  }; 
+
+  const handleDropdownOpen = () => {
+    setIsDropdownOpen(true);
   };
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-const handleDropdownOpen = () => {
-  setIsDropdownOpen(true);
-};
-
-const handleDropdownClose = () => {
-  setIsDropdownOpen(false);
-};
+  const handleDropdownClose = () => {
+    setIsDropdownOpen(false);
+  };
 
   return (
     <main>
       <div>
         <header style={styles.header}>
-       
           <div style={styles.logo}>
             <h1>Social Bloom</h1>
           </div>
@@ -306,19 +80,19 @@ const handleDropdownClose = () => {
                 </a>
               </li>
               <li style={styles.navItem} onMouseEnter={handleDropdownOpen} onMouseLeave={handleDropdownClose}>
-  <a href="#about" style={styles.link}>
-    Industries
-  </a>
-  {isDropdownOpen && (
-    <div style={styles.dropdown}>
-      <ul style={styles.dropdownMenu}>
-        <li><a href="#industry1" style={styles.dropdownMenuItem}>Industry 1</a></li>
-        <li><a href="#industry2" style={styles.dropdownMenuItem}>Industry 2</a></li>
-        <li><a href="#industry3" style={styles.dropdownMenuItem}>Industry 3</a></li>
-      </ul>
-    </div>
-  )}
-</li>
+                <a href="#about" style={styles.link}>
+                  Industries
+                </a>
+                {isDropdownOpen && (
+                  <div style={styles.dropdown}>
+                    <ul style={styles.dropdownMenu}>
+                      <li><a href="#industry1" style={styles.dropdownMenuItem}>Industry 1</a></li>
+                      <li><a href="#industry2" style={styles.dropdownMenuItem}>Industry 2</a></li>
+                      <li><a href="#industry3" style={styles.dropdownMenuItem}>Industry 3</a></li>
+                    </ul>
+                  </div>
+                )}
+              </li>
               <li style={styles.navItem}>
                 <a href="#services" style={styles.link}>
                   Case studies
@@ -467,72 +241,232 @@ const handleDropdownClose = () => {
           </div>
         </div>
         <div style={{ background: '#569CFC', width: '100%', height: '600px' }}>
-         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', position: 'relative' }}>
-  <div style={{ marginLeft: '50px', marginRight: '50px', flex: 1 }}>
-    <p style={{ color: 'white' }}>Let’s talk about your growth!</p>
-    <p style={{ marginTop: '10px', color: 'white' }}>
-      SocialBloom provides an entire sales engine from lead to close within 90 days. This same system has generated 10,000+ leads and millions in revenue for our clients.
-    </p>
-    <p style={{ marginTop: '10px', color: 'white' }}>
-      Understanding your Ideal Customer
-    </p>
-    <p style={{ marginTop: '10px', color: 'white' }}>
-      Craft compelling offers and messaging
-    </p>
-    <p style={{ marginTop: '10px', color: 'white' }}>
-      Creating / Managing outbound and marketing campaigns
-    </p>
-  </div>
-  <div style={{ flex: 1, position: 'relative', marginTop:'30px' }}>
-    <Calendar value={date} onChange={setDate} />
-    <div style={{ textAlign: 'center', bottom: '50px', right: '50px' }}>
-      <p style={{ color: 'white' ,marginRight:'400px', marginTop:'100px'} }>View Our Rankings and Reviews!</p>
-    </div>
-  </div>
-  
-</div>
-  <div style={{ width: '100%', overflow: 'hidden', position: 'relative', marginTop: '50px' }}>
-      <div style={{ display: 'flex', width: '100%', transition: 'transform 0.5s, opacity 0.5s' }}>
-        {comments.map((comment, index) => (
-          <div key={index} style={{ width: '100%', textAlign: 'center', opacity: index === currentComment ? 1 : 0, transform: `translateX(-${currentComment * 100}%)` }}>
-            <p style={{ fontSize: '18px', lineHeight: '1.6', marginBottom: '20px' }}>{comment.text}</p>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>
-              {[...Array(5)].map((star, i) => (
-                <span key={i} style={{ marginRight: '2px', color: i < comment.rating ? '#ffc107' : '#e4e5e9' }}>★</span>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', position: 'relative' }}>
+            <div style={{ marginLeft: '50px', marginRight: '50px', flex: 1 }}>
+              <p style={{ color: 'white' }}>Let’s talk about your growth!</p>
+              <p style={{ marginTop: '10px', color: 'white' }}>
+                SocialBloom provides an entire sales engine from lead to close within 90 days. This same system has generated 10,000+ leads and millions in revenue for our clients.
+              </p>
+              <p style={{ marginTop: '10px', color: 'white' }}>
+                Understanding your Ideal Customer
+              </p>
+              <p style={{ marginTop: '10px', color: 'white' }}>
+                Craft compelling offers and messaging
+              </p>
+              <p style={{ marginTop: '10px', color: 'white' }}>
+                Creating / Managing outbound and marketing campaigns
+              </p>
+            </div>
+            <div style={{ flex: 1, position: 'relative', marginTop:'30px' }}>
+              <Calendar value={date} onChange={setDate} />
+              <div style={{ textAlign: 'center', bottom: '50px', right: '50px' }}>
+                <p style={{ color: 'white' ,marginRight:'400px', marginTop:'100px'} }>View Our Rankings and Reviews!</p>
+              </div>
+            </div>
+          </div>
+          <div style={{ width: '100%', overflow: 'hidden', position: 'relative', marginTop: '50px' }}>
+            <div style={{ display: 'flex', width: '100%', transition: 'transform 0.5s, opacity 0.5s' }}>
+              {comments.map((comment, index) => (
+                <div key={index} style={{ width: '100%', textAlign: 'center', opacity: index === currentComment ? 1 : 0, transform: `translateX(-${currentComment * 100}%)` }}>
+                  <p style={{ fontSize: '18px', lineHeight: '1.6', marginBottom: '20px' }}>{comment.text}</p>
+                  <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>
+                    {[...Array(5)].map((star, i) => (
+                      <span key={i} style={{ marginRight: '2px', color: i < comment.rating ? '#ffc107' : '#e4e5e9' }}>★</span>
+                    ))}
+                  </div>
+                  <p style={{ fontSize: '16px', color: '#666' }}>-- {comment.author}</p>
+                </div>
               ))}
             </div>
-            <p style={{ fontSize: '16px', color: '#666' }}>-- {comment.author}</p>
+            <button style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: '#007bff', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer', transition: 'background-color 0.3s' }} onClick={handleSwipeLeft}>
+              View More
+            </button>
           </div>
-        ))}
-      </div>
-      <button style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: '#007bff', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer', transition: 'background-color 0.3s' }} onClick={handleSwipeLeft}>
-    View More
-  </button>
-    </div>
-    <div style={{ backgroundColor: '#333', color: 'white', padding: '50px 0', textAlign: 'center' }}>
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '20px', marginBottom: '20px' }}>
-    <a href="mailto:your@email.com" style={{ color: 'white', textDecoration: 'none' }}>
-      <img src="email-icon.png" alt="Email" style={{ width: '30px', height: '30px' }} />
-    </a>
-    <a href="https://wa.me/1234567890" style={{ color: 'white', textDecoration: 'none' }}>
-      <img src="whatsapp-icon.png" alt="WhatsApp" style={{ width: '30px', height: '30px' }} />
-    </a>
-    <a href="https://www.instagram.com/your_instagram/" style={{ color: 'white', textDecoration: 'none' }}>
-      <img src="instagram-icon.png" alt="Instagram" style={{ width: '30px', height: '30px' }} />
-    </a>
-  </div>
-  <p style={{ fontSize: '20px', marginBottom: '20px' }}>Connect with us on social media:</p>
-  <div style={{ marginBottom: '20px' }}>
-    <p style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>Contact Us:</p>
-    <p style={{ fontSize: '20px' }}>Phone: +123-456-7890</p>
-    <p style={{ fontSize: '20px' }}>Email: your@email.com</p>
-  </div>
-  <p style={{ marginBottom: '20px', fontSize: '18px' }}>Follow us on social media for updates and promotions!</p>
-</div>
-
         </div>
+        <div style={{ backgroundColor: '#333', color: 'white', padding: '50px 0',textAlign: 'center' }}>
+         
+         
+          <button style={{ ...styles.button, backgroundColor: '#007bff', color: 'white' }}>Get Started</button>
+        </div>
+        <footer style={styles.footer}>
+          <div style={{ width: '80%', margin: '0 auto', display: 'flex', justifyContent: 'space-between', padding: '20px 0' }}>
+            <div style={styles.footerLogo}>
+              <h2>Social Bloom</h2>
+              <p>Get your business off the ground with Social Bloom.</p>
+            </div>
+            <div>
+              <h3>Quick Links</h3>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li><a href="#home" style={{ color: 'white', textDecoration: 'none', margin: '5px 0', display: 'block' }}>Home</a></li>
+                <li><a href="#about" style={{ color: 'white', textDecoration: 'none', margin: '5px 0', display: 'block' }}>About</a></li>
+                <li><a href="#services" style={{ color: 'white', textDecoration: 'none', margin: '5px 0', display: 'block' }}>Services</a></li>
+                <li><a href="#contact" style={{ color: 'white', textDecoration: 'none', margin: '5px 0', display: 'block' }}>Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Contact Us</h3>
+              <p>Email: info@socialbloom.com</p>
+              <p>Phone: 123-456-7890</p>
+            </div>
+            <div>
+              <h3>Connect With Us</h3>
+             
+            </div>
+          </div>
+        </footer>
       </div>
     </main>
   );
 }
+
+const styles = {
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '20px',
+    backgroundColor: '#333',
+    color: 'white',
+  },
+  logo: {
+    flex: '1',
+  },
+  nav: {
+    listStyle: 'none',
+    display: 'flex',
+  },
+  navItem: {
+    marginRight: '20px',
+  },
+  link: {
+    color: 'white',
+    textDecoration: 'none',
+  },
+  dropdown: {
+    position: 'absolute',
+    backgroundColor: 'white',
+    padding: '10px',
+    borderRadius: '5px',
+    top: '100%',
+    zIndex: '1',
+  },
+  dropdownMenu: {
+    listStyle: 'none',
+    padding: 0,
+  },
+  dropdownMenuItem: {
+    color: '#333',
+    textDecoration: 'none',
+    display: 'block',
+    padding: '5px 0',
+  },
+  banner: {
+    backgroundColor: '#f4f4f4',
+    padding: '50px',
+    textAlign: 'center',
+  },
+  button: {
+    backgroundColor: '#569CFC',
+    color: 'white',
+    border: 'none',
+    padding: '10px 20px',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s',
+  },
+  trustedBy: {
+    backgroundColor: '#333',
+    padding: '50px',
+    textAlign: 'center',
+  },
+  trustedByTitle: {
+    color: 'white',
+    fontSize: '24px',
+  },
+  logosContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '20px',
+  },
+  logoStyle2: {
+    color: 'white',
+    fontSize: '36px',
+    margin: '0 20px',
+  },
+  logoStyle3: {
+    color: 'white',
+    fontSize: '36px',
+    margin: '0 20px',
+  },
+  logoStyle4: {
+    color: 'white',
+    fontSize: '36px',
+    margin: '0 20px',
+  },
+  videoContainer: {
+    backgroundColor: '#f4f4f4',
+    padding: '50px',
+    textAlign: 'center',
+  },
+  videoTitle: {
+    fontSize: '36px',
+    marginBottom: '20px',
+  },
+  sectionTitle: {
+    textAlign: 'center',
+    fontSize: '36px',
+    margin: '50px 0',
+  },
+  sectionContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '0 100px',
+    marginBottom: '100px',
+  },
+  sectionItem: {
+    flex: '1',
+    textAlign: 'center',
+  },
+  footerContainer: {
+    backgroundColor: '#333',
+    color: 'white',
+    padding: '50px',
+  },
+  footerHighlight: {
+    fontSize: '48px',
+    textAlign: 'center',
+  },
+  footerText: {
+    fontSize: '20px',
+    textAlign: 'center',
+  },
+  tableContainer: {
+    width: '80%',
+    margin: '0 auto',
+    overflowX: 'auto',
+  },
+  table: {
+    borderCollapse: 'collapse',
+    width: '100%',
+  },
+  th: {
+    backgroundColor: '#333',
+    color: 'white',
+    padding: '10px',
+  },
+  td: {
+    border: '1px solid #ddd',
+    padding: '10px',
+  },
+  footer: {
+    backgroundColor: '#222',
+    color: 'white',
+    marginTop: '50px',
+    padding: '20px 0',
+  },
+  footerLogo: {
+    flex: '1',
+  },
+};
 
