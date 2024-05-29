@@ -128,7 +128,7 @@ export default function Home() {
       fontWeight: '600',
       color: 'black',
     },customCalendar: {
-      width: '300px', // Adjust width as needed
+      width: '300px', 
       maxWidth: '100%',
       border: '1px solid #ddd',
       borderRadius: '8px',
